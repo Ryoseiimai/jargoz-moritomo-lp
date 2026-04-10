@@ -1322,9 +1322,11 @@
        ═══════════════════════════════════════ */
     @media (max-width: 768px) {
       .stats__grid,
-      .pillars__grid,
-      .winwin__grid {
+      .pillars__grid {
         grid-template-columns: 1fr;
+      }
+      .winwin__grid {
+        grid-template-columns: 1fr 1fr !important;
       }
       .problem__grid {
         grid-template-columns: 1fr;
@@ -1536,15 +1538,16 @@
         <span class="text-gold">「半径理論」<br>——俺に近いほど設定1。離れるほど高設定。</span>
       </h3>
       <p class="concept__lead fade-in">
-        今の業界は、パチプロを大切にしすぎている。<br>
-        本当に大切にするべきは、<strong style="color:#fff">普通に遊びに来てくれるお客さん</strong>だ。
+        パチンコ屋さんは、お客さんを勝たせるプロだ。<br>
+        プロが一般の人を勝たせて、一般の人に恩恵が届く。<br>
+        <strong style="color:#fff">そうすれば、新しい人が入ってきやすくなる。</strong>
       </p>
 
       <div class="concept__items">
         <div class="concept__item fade-in-left">
-          俺たちの周りは設定1。全力で負ける。<br>
-          でもその分、離れた席のお客さんには高設定が入る。<br>
-          <strong>全体で見たら、お客さんが勝ってる。</strong><br>
+          俺たちの周りは設定1。みんなで負け覚悟で好きな台を打つ。<br>
+          でもその分、離れた席の一般のお客さんに恩恵が届く。<br>
+          <strong>プロが一般の人を勝たせる。全体で見たら、お客さんが勝ってる。</strong><br>
           これがホールとお客さん、両方を大切にする仕組み。
         </div>
         <div class="concept__item fade-in-left" style="transition-delay:0.15s">
@@ -1572,13 +1575,47 @@
     </div>
   </section>
 
+  <!-- ══════════════ STAFF PICKS ══════════════ -->
+  <section class="concept">
+    <div class="container">
+      <h3 class="concept__heading fade-in">
+        <span class="text-gold">人気台じゃない。<br>店長とスタッフが好きな台に、設定が入る。</span>
+      </h3>
+      <p class="concept__lead fade-in">
+        今の業界は「人気台に高設定」が当たり前になってる。<br>
+        でもそれって、誰の愛も入ってない。ただのデータだ。<br>
+        <strong style="color:#fff">店長やスタッフが本当に好きな台に設定を入れたら、どうなる？</strong>
+      </p>
+      <div class="concept__items">
+        <div class="concept__item fade-in-left">
+          店長が「この台、面白いんだよ」って語れる。<br>
+          スタッフが「これ打ってみてください」って薦められる。<br>
+          お客さんが「へぇ、知らなかった」って座る。<br>
+          <strong>そこに会話が生まれて、笑顔が生まれる。</strong>
+        </div>
+        <div class="concept__item fade-in-left" style="transition-delay:0.15s">
+          人気がない台でも、愛があれば光る。<br>
+          クソ台打ちニキが証明した通りだ。<br>
+          店長の推し台、スタッフの推し台。<br>
+          <strong>その面白さがネットで広がったら、最高じゃないか。</strong>
+        </div>
+        <div class="concept__item concept__item--hero fade-in-left" style="transition-delay:0.3s">
+          「あの店の店長の推し台がヤバい」<br>
+          「スタッフさんに薦められた台で勝った」<br>
+          そういう口コミが広がる店に、人は集まる。<br>
+          <strong>データじゃなく愛で台を選ぶ。それが新しいパチンコ屋さんだ。</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════════ WIN-WIN STRUCTURE ══════════════ -->
-  <section class="winwin">
+  <section class="winwin" style="background: var(--zinc-900);">
     <div class="container">
       <h3 class="winwin__heading fade-in">
         <span class="text-gold">全員が得する構造</span>
       </h3>
-      <div class="winwin__grid stagger">
+      <div class="winwin__grid stagger" style="grid-template-columns: repeat(4, 1fr);">
 
         <div class="winwin__card fade-in">
           <div class="winwin__icon">&#x1F3E0;</div>
@@ -1586,20 +1623,32 @@
           <h4 class="winwin__title">ホールが潤う</h4>
           <p class="winwin__desc">
             設定を上げる必要がない。<br>
-            通常営業のままで演者来店が成立。<br>
-            その分、最高の接客とサービスで返す。<br>
+            スタッフの推し台が光る。<br>
+            最高の接客とサービスで返す。<br>
             「この店に来てよかった」を作れる。
+          </p>
+        </div>
+
+        <div class="winwin__card fade-in">
+          <div class="winwin__icon">&#x1F464;</div>
+          <p class="winwin__role">CUSTOMER</p>
+          <h4 class="winwin__title">一般のお客さんが勝てる</h4>
+          <p class="winwin__desc">
+            プロが一般の人を勝たせる構造。<br>
+            恩恵が普通のお客さんに届く。<br>
+            新しい人も入ってきやすい。<br>
+            パチンコが「遊び」に戻る。
           </p>
         </div>
 
         <div class="winwin__card fade-in">
           <div class="winwin__icon">&#x1F3AC;</div>
           <p class="winwin__role">VIEWER</p>
-          <h4 class="winwin__title">視聴者が楽しい</h4>
+          <h4 class="winwin__title">ネットで広がる</h4>
           <p class="winwin__desc">
-            勝ち確動画はもう飽きた。<br>
+            店長の推し台がコンテンツになる。<br>
             散り芸のドラマと予測不能な展開。<br>
-            「今日はどう負けるんだ？」が最高のフック。
+            「あの店面白いぞ」が口コミで広がる。
           </p>
         </div>
 
@@ -1610,7 +1659,7 @@
           <p class="winwin__desc">
             設定は1。でもパチンコ屋さんの待遇がすごい。<br>
             好きな台を好きなだけ打てて、<br>
-            その姿がそのままコンテンツになる。
+            その姿がコンテンツになる。
           </p>
         </div>
 
