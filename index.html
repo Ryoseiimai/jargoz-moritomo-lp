@@ -1535,6 +1535,140 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+    /* ═══════════════════════════════════════
+       CYCLE DIAGRAM (半径理論 → 図解)
+       ═══════════════════════════════════════ */
+    .cycle {
+      position: relative;
+      max-width: 600px;
+      margin: 2.5rem auto 0;
+    }
+
+    .cycle__ring {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+    }
+
+    /* rotating dashed circle */
+    .cycle__ring::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border: 2px dashed rgba(191,149,63,0.25);
+      border-radius: 50%;
+      animation: spin 30s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* center label */
+    .cycle__center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+    .cycle__center-icon { font-size: 2.5rem; margin-bottom: 0.25rem; }
+    .cycle__center-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    /* 4 nodes */
+    .cycle__node {
+      position: absolute;
+      width: 140px;
+      text-align: center;
+      z-index: 2;
+    }
+    .cycle__node-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 0.5rem;
+      border: 2px solid rgba(191,149,63,0.4);
+      background: var(--zinc-900);
+    }
+    .cycle__node-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+    .cycle__node-desc {
+      font-size: 0.65rem;
+      color: #999;
+      line-height: 1.5;
+    }
+
+    /* position 4 nodes: top, right, bottom, left */
+    .cycle__node--1 { top: 0; left: 50%; transform: translateX(-50%); }
+    .cycle__node--2 { top: 50%; right: 0; transform: translateY(-50%); }
+    .cycle__node--3 { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .cycle__node--4 { top: 50%; left: 0; transform: translateY(-50%); }
+
+    /* arrows between nodes (SVG overlay) */
+    .cycle__arrows {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .cycle__arrows svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* bottom explanation cards */
+    .cycle-explain {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .cycle-explain__card {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: var(--zinc-800);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .cycle-explain__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+    .cycle-explain__title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .cycle-explain__text {
+      font-size: 0.8rem;
+      color: #aaa;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 600px) {
+      .cycle__ring { max-width: 320px; margin: 0 auto; }
+      .cycle__node { width: 100px; }
+      .cycle__node-icon { width: 48px; height: 48px; font-size: 1.2rem; }
+      .cycle__node-label { font-size: 0.7rem; }
+      .cycle__node-desc { font-size: 0.6rem; }
+      .cycle__center-icon { font-size: 1.8rem; }
+      .cycle__center-text { font-size: 0.7rem; }
+      .cycle-explain { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
@@ -1560,7 +1694,7 @@
     <ul class="navbar__links">
       <li><a href="#concept" class="navbar__link">コンセプト</a></li>
       <li><a href="#pillars" class="navbar__link">3つのルール</a></li>
-      <li><a href="#radius" class="navbar__link">半径理論</a></li>
+      <li><a href="#radius" class="navbar__link">仕組み</a></li>
       <li><a href="schedule.html" class="navbar__link">来店予定</a></li>
       <li><a href="#gallery-section" class="navbar__link">ギャラリー</a></li>
       <li><a href="#faq-section" class="navbar__link">FAQ</a></li>
@@ -1723,47 +1857,104 @@
     </div>
   </section>
 
-  <!-- ══════════════ RADIUS THEORY ══════════════ -->
+  <!-- ══════════════ CYCLE DIAGRAM (旧・半径理論) ══════════════ -->
   <section class="concept" id="radius" style="background: var(--zinc-900);">
     <div class="container">
       <h3 class="concept__heading fade-in">
-        <span class="text-gold">「半径理論」<br>——俺に近いほど設定1。離れるほど高設定。</span>
+        <span class="text-gold">お金と笑顔の循環。<br>これがジャーゴスの仕組み。</span>
       </h3>
       <p class="concept__lead fade-in">
-        パチンコ屋さんは、お客さんを勝たせるプロだ。<br>
-        プロが一般の人を勝たせて、一般の人に恩恵が届く。<br>
-        <strong style="color:#fff">そうすれば、新しい人が入ってきやすくなる。</strong>
+        俺たちが設定1を引き受ける。ホールが潤う。<br>
+        一般のお客さんに還元される。俺たちは待遇で返してもらう。<br>
+        <strong style="color:#fff">全員が笑える。これが循環だ。</strong>
       </p>
 
-      <div class="concept__items">
-        <div class="concept__item fade-in-left">
-          俺たちの周りは設定1。みんなで負け覚悟で好きな台を打つ。<br>
-          でもその分、離れた席の一般のお客さんに恩恵が届く。<br>
-          <strong>プロが一般の人を勝たせる。全体で見たら、お客さんが勝ってる。</strong><br>
-          これがホールとお客さん、両方を大切にする仕組み。
-        </div>
-        <div class="concept__item fade-in-left" style="transition-delay:0.15s">
-          じゃあ俺たちの周りは損なのか？<br>
-          逆だ。<strong>設定は1。でもパチンコ屋さんがすごい待遇をしてくれる。</strong><br>
-          専用ラウンジ、ドリンクサービス、最高の接客。<br>
-          ホールが「この人たちのおかげで店が回ってる」と感謝してくれる。<br>
-          設定じゃなく「体験」で返してもらう。<strong>それがジャーゴス。</strong>
-        </div>
-        <div class="concept__item fade-in-left" style="transition-delay:0.3s">
-          想像してみてくれ。<br>
-          店に入ったら「お待ちしてました」と迎えられる。<br>
-          好きな台の横に、おしぼりとコーヒーが置いてある。<br>
-          負けてるのに、なぜか最高にいい気分で帰れる。<br>
-          <strong>そういうパチンコ屋さんが増えたら、最高じゃないか。</strong>
-        </div>
-        <div class="concept__item concept__item--hero fade-in-left" style="transition-delay:0.45s">
-          設定を追いかけるだけがパチンコじゃない。<br>
-          お客さんが楽しんで、ホールが潤って、<br>
-          俺たちは設定1と引き換えにジャーゴスな待遇を受ける。<br>
-          <strong>俺の周りからジャーゴスにしよう！<br>
-          これが、全員が笑える新しいパチンコだ。</strong>
+      <!-- ── 循環図 ── -->
+      <div class="cycle fade-in">
+        <div class="cycle__ring">
+
+          <!-- 中央 -->
+          <div class="cycle__center">
+            <div class="cycle__center-icon">&#x267B;&#xFE0F;</div>
+            <div class="cycle__center-text text-gold">笑顔の<br>循環</div>
+          </div>
+
+          <!-- ノード1: 俺たち（上） -->
+          <div class="cycle__node cycle__node--1">
+            <div class="cycle__node-icon gold-gradient" style="color:var(--black);">&#x1F451;</div>
+            <div class="cycle__node-label text-gold">俺たち</div>
+            <div class="cycle__node-desc">設定1を引き受ける<br>好きな台を全力で打つ</div>
+          </div>
+
+          <!-- ノード2: ホール（右） -->
+          <div class="cycle__node cycle__node--2">
+            <div class="cycle__node-icon" style="background:rgba(34,197,94,0.15); border-color:var(--green);">&#x1F3E0;</div>
+            <div class="cycle__node-label" style="color:var(--green);">ホール</div>
+            <div class="cycle__node-desc">店が潤う<br>経営が安定する</div>
+          </div>
+
+          <!-- ノード3: 一般のお客さん（下） -->
+          <div class="cycle__node cycle__node--3">
+            <div class="cycle__node-icon" style="background:rgba(96,165,250,0.15); border-color:var(--blue);">&#x1F46A;</div>
+            <div class="cycle__node-label" style="color:var(--blue);">一般のお客さん</div>
+            <div class="cycle__node-desc">高設定が打てる<br>勝てる、楽しい</div>
+          </div>
+
+          <!-- ノード4: 俺たちへの恩返し（左） -->
+          <div class="cycle__node cycle__node--4">
+            <div class="cycle__node-icon" style="background:rgba(251,191,36,0.15); border-color:#fbbf24;">&#x2728;</div>
+            <div class="cycle__node-label" style="color:#fbbf24;">ジャーゴスな待遇</div>
+            <div class="cycle__node-desc">最高の接客で返る<br>設定じゃなく体験で</div>
+          </div>
+
+          <!-- 矢印（SVG） -->
+          <div class="cycle__arrows">
+            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowGold" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6" fill="rgba(191,149,63,0.7)"/>
+                </marker>
+              </defs>
+              <!-- 上→右 -->
+              <path d="M 250 80 Q 320 80 330 160" stroke="rgba(191,149,63,0.4)" stroke-width="2" marker-end="url(#arrowGold)"/>
+              <!-- 右→下 -->
+              <path d="M 330 240 Q 320 320 250 330" stroke="rgba(191,149,63,0.4)" stroke-width="2" marker-end="url(#arrowGold)"/>
+              <!-- 下→左 -->
+              <path d="M 150 330 Q 80 320 70 240" stroke="rgba(191,149,63,0.4)" stroke-width="2" marker-end="url(#arrowGold)"/>
+              <!-- 左→上 -->
+              <path d="M 70 160 Q 80 80 150 70" stroke="rgba(191,149,63,0.4)" stroke-width="2" marker-end="url(#arrowGold)"/>
+            </svg>
+          </div>
         </div>
       </div>
+
+      <!-- ── 4ステップ解説 ── -->
+      <div class="cycle-explain fade-in">
+        <div class="cycle-explain__card">
+          <div class="cycle-explain__num gold-gradient" style="color:var(--black);">1</div>
+          <div class="cycle-explain__title text-gold">俺たちが設定1を引き受ける</div>
+          <div class="cycle-explain__text">負け覚悟で好きな台に座る。勝ち負けじゃない、好きな台を全力で楽しむ。</div>
+        </div>
+        <div class="cycle-explain__card">
+          <div class="cycle-explain__num" style="background:rgba(34,197,94,0.2); color:var(--green);">2</div>
+          <div class="cycle-explain__title" style="color:var(--green);">ホールが潤う</div>
+          <div class="cycle-explain__text">俺たちが打つ分、店の売上が安定する。経営が回る。余裕ができる。</div>
+        </div>
+        <div class="cycle-explain__card">
+          <div class="cycle-explain__num" style="background:rgba(96,165,250,0.2); color:var(--blue);">3</div>
+          <div class="cycle-explain__title" style="color:var(--blue);">一般のお客さんに還元</div>
+          <div class="cycle-explain__text">余裕のあるホールはお客さんに還元できる。高設定が打てる。勝てる。新しい人も来る。</div>
+        </div>
+        <div class="cycle-explain__card">
+          <div class="cycle-explain__num" style="background:rgba(251,191,36,0.2); color:#fbbf24;">4</div>
+          <div class="cycle-explain__title" style="color:#fbbf24;">俺たちにはジャーゴスな待遇</div>
+          <div class="cycle-explain__text">「お待ちしてました」おしぼりとコーヒー。負けてるのに最高にいい気分。設定じゃなく体験で返してもらう。</div>
+        </div>
+      </div>
+
+      <p class="concept__lead fade-in" style="margin-top:2rem; text-align:center;">
+        <strong class="text-gold" style="font-size:1.2rem;">全員が笑える。これが新しいパチンコだ。</strong>
+      </p>
     </div>
   </section>
 
@@ -2033,7 +2224,7 @@
         </div>
 
         <div class="faq__item fade-in">
-          <button class="faq__question">半径理論って具体的にどういうこと？</button>
+          <button class="faq__question">お金と笑顔の循環って具体的にどういうこと？</button>
           <div class="faq__answer">
             <p>みんなで負け覚悟で好きな台を打つ。システム上は負ける。でもその分、店が潤う。潤った店は最高のサービスで返してくれる。笑顔が増える。これがお金の循環です。みんなで一緒にその店を盛り上げる。みんなでジャーゴスな体験を受け取る。それだけだ。</p>
           </div>
