@@ -595,6 +595,254 @@
     }
 
     /* ═══════════════════════════════════════
+       TICKER
+       ═══════════════════════════════════════ */
+    .ticker {
+      background: linear-gradient(90deg, var(--gold-4), var(--gold-1), var(--gold-3));
+      overflow: hidden;
+      padding: 0.75rem 0;
+      position: relative;
+    }
+
+    .ticker__track {
+      display: flex;
+      width: max-content;
+      animation: ticker-scroll 20s linear infinite;
+    }
+
+    .ticker__item {
+      white-space: nowrap;
+      padding: 0 3rem;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--black);
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ═══════════════════════════════════════
+       VOICES (TESTIMONIALS)
+       ═══════════════════════════════════════ */
+    .voices {
+      padding: 7rem 0;
+    }
+
+    .voices__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 4rem;
+    }
+
+    .voices__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .voice {
+      padding: 2rem;
+      border-radius: 1.25rem;
+      background: var(--zinc-800);
+      position: relative;
+    }
+
+    .voice::before {
+      content: "\201C";
+      position: absolute;
+      top: 0.5rem;
+      left: 1.2rem;
+      font-size: 4rem;
+      line-height: 1;
+      opacity: 0.08;
+      font-family: Georgia, serif;
+    }
+
+    .voice__text {
+      font-size: 0.95rem;
+      color: #d4d4d8;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .voice__author {
+      font-size: 0.8rem;
+      color: #71717a;
+      font-weight: 700;
+    }
+
+    .voice__stars {
+      color: var(--gold-3);
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ═══════════════════════════════════════
+       NEXT EVENT
+       ═══════════════════════════════════════ */
+    .next-event {
+      padding: 5rem 0;
+      background: var(--zinc-900);
+    }
+
+    .next-event__inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 1.5rem;
+      background: linear-gradient(135deg, rgba(191, 149, 63, 0.06), rgba(191, 149, 63, 0.02));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .next-event__inner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 1.5rem;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--gold-1), transparent 60%, var(--gold-3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .next-event__badge {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .next-event__title {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .next-event__detail {
+      color: #a1a1aa;
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .next-event__detail strong {
+      color: #fff;
+    }
+
+    .next-event__cta {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 999px;
+      color: var(--black);
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.3s var(--ease-out-expo);
+    }
+    .next-event__cta:hover { transform: scale(1.06); }
+
+    /* ═══════════════════════════════════════
+       GALLERY (VIDEO PLACEHOLDER)
+       ═══════════════════════════════════════ */
+    .gallery {
+      padding: 7rem 0;
+    }
+
+    .gallery__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .gallery__sub {
+      text-align: center;
+      color: #71717a;
+      margin-bottom: 4rem;
+      font-size: 1rem;
+    }
+
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .gallery__item {
+      aspect-ratio: 16 / 9;
+      border-radius: 1rem;
+      background: var(--zinc-800);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+    .gallery__item:hover { transform: scale(1.03); }
+
+    .gallery__item-icon {
+      font-size: 2.5rem;
+      opacity: 0.5;
+    }
+
+    .gallery__item-label {
+      font-size: 0.85rem;
+      color: #71717a;
+      font-weight: 700;
+    }
+
+    /* ═══════════════════════════════════════
+       PARALLAX DIVIDER
+       ═══════════════════════════════════════ */
+    .parallax-divider {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .parallax-divider__bg {
+      position: absolute;
+      inset: -50px;
+      background:
+        radial-gradient(ellipse 100% 100% at 50% 50%, rgba(191, 149, 63, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .parallax-divider__text {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: 0.3em;
+      opacity: 0.3;
+    }
+
+    /* ═══════════════════════════════════════
        PROFILES
        ═══════════════════════════════════════ */
     .profiles {
@@ -832,6 +1080,12 @@
       .problem__grid {
         grid-template-columns: 1fr;
       }
+      .voices__grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery__grid {
+        grid-template-columns: 1fr;
+      }
       .profiles__grid {
         grid-template-columns: 1fr;
       }
@@ -870,6 +1124,22 @@
       <span></span>
     </div>
   </section>
+
+  <!-- ══════════════ TICKER ══════════════ -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span class="ticker__item">&#x1F3B0; 好きな台を、全力で。</span>
+      <span class="ticker__item">&#x1F525; 設定1は俺たちが請け負う</span>
+      <span class="ticker__item">&#x1F91D; みんなでパチンコ業界を救おう</span>
+      <span class="ticker__item">&#x1F4A5; 散り芸エンタメ始動</span>
+      <span class="ticker__item">&#x1F451; 負け覚悟で笑おう</span>
+      <span class="ticker__item">&#x1F3B0; 好きな台を、全力で。</span>
+      <span class="ticker__item">&#x1F525; 設定1は俺たちが請け負う</span>
+      <span class="ticker__item">&#x1F91D; みんなでパチンコ業界を救おう</span>
+      <span class="ticker__item">&#x1F4A5; 散り芸エンタメ始動</span>
+      <span class="ticker__item">&#x1F451; 負け覚悟で笑おう</span>
+    </div>
+  </div>
 
   <!-- ══════════════ PROBLEM ══════════════ -->
   <section class="problem">
@@ -1087,6 +1357,88 @@
           <p class="stat-card__label">笑顔で帰れた回数</p>
           <p class="stat-card__value stat-card__value--blue" id="counter-smile">0回</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ GALLERY ══════════════ -->
+  <section class="gallery">
+    <div class="container">
+      <h3 class="gallery__heading fade-in">
+        <span class="text-gold">散り芸ギャラリー</span>
+      </h3>
+      <p class="gallery__sub fade-in">最高の散り方を、映像で。</p>
+      <div class="gallery__grid">
+        <div class="gallery__item fade-in">
+          <div class="gallery__item-icon">&#x25B6;</div>
+          <p class="gallery__item-label">EP.01 Coming Soon</p>
+        </div>
+        <div class="gallery__item fade-in">
+          <div class="gallery__item-icon">&#x25B6;</div>
+          <p class="gallery__item-label">EP.02 Coming Soon</p>
+        </div>
+        <div class="gallery__item fade-in">
+          <div class="gallery__item-icon">&#x25B6;</div>
+          <p class="gallery__item-label">EP.03 Coming Soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ PARALLAX DIVIDER ══════════════ -->
+  <div class="parallax-divider">
+    <div class="parallax-divider__bg"></div>
+    <p class="parallax-divider__text text-gold">GORGEOUS &#x00D7; MORITOMO</p>
+  </div>
+
+  <!-- ══════════════ VOICES ══════════════ -->
+  <section class="voices">
+    <div class="container">
+      <h3 class="voices__heading fade-in">
+        <span class="text-gold">みんなの声</span>
+      </h3>
+      <div class="voices__grid stagger">
+
+        <div class="voice fade-in">
+          <p class="voice__stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+          <p class="voice__text">
+            久しぶりにパチンコで純粋に笑った。勝ち負けじゃなくて、隣で一緒に打つのが楽しかった。
+          </p>
+          <p class="voice__author">&#8212; 来店参加者 A さん</p>
+        </div>
+
+        <div class="voice fade-in">
+          <p class="voice__stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+          <p class="voice__text">
+            散り方が美しすぎて逆に感動した。5万負けたけど最高の1日だった。これが全勝か。
+          </p>
+          <p class="voice__author">&#8212; 来店参加者 B さん</p>
+        </div>
+
+        <div class="voice fade-in">
+          <p class="voice__stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+          <p class="voice__text">
+            ホール側としてありがたい。通常営業のまま盛り上がるイベントは他にない。またお願いしたい。
+          </p>
+          <p class="voice__author">&#8212; ホール店長 C さん</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ NEXT EVENT ══════════════ -->
+  <section class="next-event">
+    <div class="container">
+      <div class="next-event__inner fade-in">
+        <div class="next-event__badge gold-gradient">NEXT EVENT</div>
+        <h3 class="next-event__title text-gold">第1回 散り芸グランプリ</h3>
+        <p class="next-event__detail">
+          <strong>日時:</strong> 近日発表<br>
+          <strong>場所:</strong> 都内某ホール<br>
+          <strong>参加条件:</strong> 好きな台がある人。負けてもいい人。笑える人。
+        </p>
+        <a href="#" class="next-event__cta gold-gradient">イベント情報を受け取る</a>
       </div>
     </div>
   </section>
