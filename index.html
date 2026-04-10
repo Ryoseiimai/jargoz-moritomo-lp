@@ -39,14 +39,19 @@
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 60px;
+    }
 
     body {
       background: var(--black);
       color: #fff;
       font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
-      line-height: 1.7;
+      line-height: 1.8;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* ═══════════════════════════════════════
@@ -592,6 +597,181 @@
     .cta-final__btn:hover {
       transform: scale(1.06);
       box-shadow: 0 0 50px rgba(191, 149, 63, 0.3);
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE LOADER
+       ═══════════════════════════════════════ */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: opacity 0.6s var(--ease-out-expo), visibility 0.6s;
+    }
+
+    .loader--hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader__text {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .loader__bar {
+      width: 120px;
+      height: 3px;
+      border-radius: 3px;
+      background: var(--zinc-800);
+      overflow: hidden;
+    }
+
+    .loader__bar-inner {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+      animation: loader-fill 1.2s var(--ease-out-expo) forwards;
+    }
+
+    @keyframes loader-fill {
+      to { width: 100%; }
+    }
+
+    /* ═══════════════════════════════════════
+       CURSOR GLOW (desktop only)
+       ═══════════════════════════════════════ */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191, 149, 63, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+
+    .cursor-glow--active { opacity: 1; }
+
+    @media (hover: none) {
+      .cursor-glow { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       STICKY MOBILE CTA
+       ═══════════════════════════════════════ */
+    .sticky-cta {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .sticky-cta {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 998;
+        padding: 0.75rem 1rem;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(191, 149, 63, 0.2);
+        justify-content: center;
+        gap: 0.75rem;
+        transform: translateY(100%);
+        transition: transform 0.4s var(--ease-out-expo);
+      }
+
+      .sticky-cta--visible {
+        transform: translateY(0);
+      }
+
+      .sticky-cta__btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 0.85rem;
+        text-decoration: none;
+        text-align: center;
+        flex: 1;
+        max-width: 200px;
+      }
+
+      .sticky-cta__btn--primary { color: var(--black); }
+      .sticky-cta__btn--secondary {
+        color: var(--gold-3);
+        border: 1.5px solid rgba(191, 149, 63, 0.4);
+        background: transparent;
+      }
+
+      /* give space for sticky bar */
+      footer { padding-bottom: 5rem; }
+    }
+
+    /* ═══════════════════════════════════════
+       NAV ACTIVE STATE
+       ═══════════════════════════════════════ */
+    .navbar__link--active {
+      color: var(--gold-2) !important;
+      position: relative;
+    }
+
+    .navbar__link--active::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold-3);
+      border-radius: 2px;
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION SPACING RHYTHM
+       ═══════════════════════════════════════ */
+    section {
+      position: relative;
+    }
+
+    /* subtle top-fade for alternating sections */
+    .problem::before,
+    .pillars::before,
+    .stats::before,
+    .faq::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--black), transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════
+       IMPROVED TOUCH TARGETS
+       ═══════════════════════════════════════ */
+    .faq__question {
+      min-height: 56px;
+    }
+
+    .share__btn {
+      min-height: 48px;
+      min-width: 48px;
     }
 
     /* ═══════════════════════════════════════
@@ -1360,6 +1540,17 @@
 
 <body>
 
+  <!-- ══════════════ LOADER ══════════════ -->
+  <div class="loader" id="loader">
+    <p class="loader__text text-gold">&#x1F3B0; ジャーゴスな森友</p>
+    <div class="loader__bar">
+      <div class="loader__bar-inner"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ CURSOR GLOW ══════════════ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
   <!-- ══════════════ SCROLL PROGRESS ══════════════ -->
   <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -1969,6 +2160,12 @@
     </div>
   </section>
 
+  <!-- ══════════════ STICKY MOBILE CTA ══════════════ -->
+  <div class="sticky-cta" id="stickyCta">
+    <a href="#" class="sticky-cta__btn sticky-cta__btn--primary gold-gradient">一緒に散りに行く</a>
+    <a href="#" class="sticky-cta__btn sticky-cta__btn--secondary">ホール関係者</a>
+  </div>
+
   <!-- ══════════════ BACK TO TOP ══════════════ -->
   <button class="back-to-top gold-gradient" id="backToTop" onclick="window.scrollTo({top:0})">&#x2191;</button>
 
@@ -2066,8 +2263,62 @@
         backToTop.classList.remove('back-to-top--visible');
       }
 
+      /* sticky mobile CTA */
+      if (stickyCta) {
+        if (scrollTop > window.innerHeight) {
+          stickyCta.classList.add('sticky-cta--visible');
+        } else {
+          stickyCta.classList.remove('sticky-cta--visible');
+        }
+      }
+
+      /* active nav */
+      updateActiveNav();
+
       lastScroll = scrollTop;
     }, { passive: true });
+
+    /* ── Page Loader ── */
+    const loader = document.getElementById('loader');
+    window.addEventListener('load', () => {
+      setTimeout(() => loader.classList.add('loader--hidden'), 1400);
+    });
+
+    /* ── Cursor Glow (desktop) ── */
+    const glow = document.getElementById('cursorGlow');
+    if (window.matchMedia('(hover: hover)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+        if (!glow.classList.contains('cursor-glow--active')) {
+          glow.classList.add('cursor-glow--active');
+        }
+      });
+    }
+
+    /* ── Sticky Mobile CTA ── */
+    const stickyCta = document.getElementById('stickyCta');
+
+    /* ── Active Nav Link ── */
+    const navLinks = document.querySelectorAll('.navbar__link');
+    const sections = document.querySelectorAll('section[id]');
+
+    function updateActiveNav() {
+      const scrollY = window.scrollY + 200;
+      sections.forEach((sec) => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        const link = document.querySelector('.navbar__link[href="#' + id + '"]');
+        if (link) {
+          if (scrollY >= top && scrollY < top + height) {
+            link.classList.add('navbar__link--active');
+          } else {
+            link.classList.remove('navbar__link--active');
+          }
+        }
+      });
+    }
 
     /* ── FAQ Accordion ── */
     document.querySelectorAll('.faq__question').forEach((btn) => {
