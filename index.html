@@ -595,6 +595,255 @@
     }
 
     /* ═══════════════════════════════════════
+       SCROLL PROGRESS BAR
+       ═══════════════════════════════════════ */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-1), var(--gold-2), var(--gold-3));
+      z-index: 9999;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ═══════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 3px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(191, 149, 63, 0.1);
+      transform: translateY(-110%);
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+
+    .navbar--visible {
+      transform: translateY(0);
+    }
+
+    .navbar__logo {
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .navbar__links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .navbar__link {
+      color: #a1a1aa;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .navbar__link:hover { color: var(--gold-2); }
+
+    @media (max-width: 768px) {
+      .navbar__links { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       FAQ
+       ═══════════════════════════════════════ */
+    .faq {
+      padding: 7rem 0;
+      background: var(--zinc-900);
+    }
+
+    .faq__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 4rem;
+    }
+
+    .faq__list {
+      max-width: 750px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq__item {
+      border: 1px solid var(--zinc-700);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .faq__item:hover { border-color: rgba(191, 149, 63, 0.3); }
+
+    .faq__question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 1.25rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+    }
+
+    .faq__question::after {
+      content: "+";
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold-3);
+      transition: transform 0.3s var(--ease-out-expo);
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .faq__item.active .faq__question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s;
+      padding: 0 1.5rem;
+    }
+
+    .faq__item.active .faq__answer {
+      max-height: 300px;
+      padding: 0 1.5rem 1.25rem;
+    }
+
+    .faq__answer p {
+      color: #a1a1aa;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════
+       VISION TIMELINE
+       ═══════════════════════════════════════ */
+    .vision {
+      padding: 7rem 0;
+    }
+
+    .vision__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 4rem;
+    }
+
+    .timeline {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold-1), var(--gold-3), transparent);
+    }
+
+    .timeline__item {
+      position: relative;
+      padding-bottom: 3rem;
+    }
+
+    .timeline__item::before {
+      content: "";
+      position: absolute;
+      left: -2.35rem;
+      top: 0.35rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold-3);
+      border: 3px solid var(--black);
+    }
+
+    .timeline__phase {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      color: var(--gold-3);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline__title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline__desc {
+      color: #a1a1aa;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════
+       BACK TO TOP
+       ═══════════════════════════════════════ */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--black);
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s var(--ease-out-expo);
+      box-shadow: 0 4px 20px rgba(191, 149, 63, 0.3);
+    }
+
+    .back-to-top--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(191, 149, 63, 0.5);
+    }
+
+    /* ═══════════════════════════════════════
        TICKER
        ═══════════════════════════════════════ */
     .ticker {
@@ -1109,6 +1358,21 @@
 
 <body>
 
+  <!-- ══════════════ SCROLL PROGRESS ══════════════ -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ══════════════ NAVBAR ══════════════ -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="navbar__logo text-gold">&#x1F3B0; ジャーゴスな森友</a>
+    <ul class="navbar__links">
+      <li><a href="#concept" class="navbar__link">コンセプト</a></li>
+      <li><a href="#pillars" class="navbar__link">3つのルール</a></li>
+      <li><a href="#radius" class="navbar__link">半径理論</a></li>
+      <li><a href="#gallery-section" class="navbar__link">ギャラリー</a></li>
+      <li><a href="#faq-section" class="navbar__link">FAQ</a></li>
+    </ul>
+  </nav>
+
   <!-- ══════════════ HERO ══════════════ -->
   <section class="hero">
     <p class="hero__kicker">PACHINKO ENTERTAINMENT PROJECT</p>
@@ -1362,7 +1626,7 @@
   </section>
 
   <!-- ══════════════ GALLERY ══════════════ -->
-  <section class="gallery">
+  <section class="gallery" id="gallery-section">
     <div class="container">
       <h3 class="gallery__heading fade-in">
         <span class="text-gold">散り芸ギャラリー</span>
@@ -1492,6 +1756,89 @@
     </div>
   </section>
 
+  <!-- ══════════════ FAQ ══════════════ -->
+  <section class="faq" id="faq-section">
+    <div class="container">
+      <h3 class="faq__heading fade-in">
+        <span class="text-gold">よくある質問</span>
+      </h3>
+      <div class="faq__list">
+
+        <div class="faq__item fade-in">
+          <button class="faq__question">本当に負けるんですか？</button>
+          <div class="faq__answer">
+            <p>はい。好きな台を何でもない日に打つので、高設定の保証は一切ありません。でもそれがいい。勝ちを求めるんじゃなく、好きな台を全力で楽しむ。結果として負けることが多いですが、散り方が最高なら俺たちにとってはそれが「全勝」です。</p>
+          </div>
+        </div>
+
+        <div class="faq__item fade-in">
+          <button class="faq__question">ホールに迷惑じゃないんですか？</button>
+          <div class="faq__answer">
+            <p>むしろ逆です。従来の演者来店は高設定を入れて客に勝たせる＝店の利益を圧迫します。俺たちは通常営業のまま来るので、ホールにダメージがない。むしろ俺たちが負けることで店が潤い、その分をお客さんに還元できる。全員が得する構造です。</p>
+          </div>
+        </div>
+
+        <div class="faq__item fade-in">
+          <button class="faq__question">半径理論って具体的にどういうこと？</button>
+          <div class="faq__answer">
+            <p>俺たちの近くの席は設定1（低設定）。離れた席のお客さんには高設定が入る。全体で見ると、お客さんが勝てる構造になっています。俺たちの周りはその代わり、ホールからのVIP待遇やゴージャスな体験で返してもらう。設定じゃなく「体験」で返すのが俺たちの特権です。</p>
+          </div>
+        </div>
+
+        <div class="faq__item fade-in">
+          <button class="faq__question">一緒に打ちに行けますか？</button>
+          <div class="faq__answer">
+            <p>もちろん！「負けてもいい人、一緒に打とう！」がコンセプトなので、好きな台がある人なら誰でも歓迎です。来店イベントの情報はSNSで告知するのでフォローしてお待ちください。</p>
+          </div>
+        </div>
+
+        <div class="faq__item fade-in">
+          <button class="faq__question">ホールとして依頼するにはどうすれば？</button>
+          <div class="faq__answer">
+            <p>ページ下部の「ホール関係者の方はこちら」ボタンからご連絡ください。通常営業のまま盛り上がるイベントを一緒に作りましょう。設定を上げる必要もないので、利益を圧迫しません。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ VISION TIMELINE ══════════════ -->
+  <section class="vision">
+    <div class="container">
+      <h3 class="vision__heading fade-in">
+        <span class="text-gold">俺たちのビジョン</span>
+      </h3>
+      <div class="timeline">
+
+        <div class="timeline__item fade-in-left">
+          <p class="timeline__phase">PHASE 01</p>
+          <h4 class="timeline__title">散り芸コンテンツ開始</h4>
+          <p class="timeline__desc">YouTubeで散り芸動画を配信。好きな台を全力で打つ姿をエンタメとして届ける。</p>
+        </div>
+
+        <div class="timeline__item fade-in-left" style="transition-delay:0.15s">
+          <p class="timeline__phase">PHASE 02</p>
+          <h4 class="timeline__title">来店イベント全国展開</h4>
+          <p class="timeline__desc">賛同してくれるホールと組んで、「散り芸グランプリ」を全国で開催。負けてもいい仲間が集まる場を作る。</p>
+        </div>
+
+        <div class="timeline__item fade-in-left" style="transition-delay:0.3s">
+          <p class="timeline__phase">PHASE 03</p>
+          <h4 class="timeline__title">業界の空気を変える</h4>
+          <p class="timeline__desc">「勝ちだけがパチンコじゃない」という空気を業界に根付かせる。ホールもお客さんも演者も、全員が笑えるパチンコ文化を作る。</p>
+        </div>
+
+        <div class="timeline__item fade-in-left" style="transition-delay:0.45s">
+          <p class="timeline__phase">PHASE 04</p>
+          <h4 class="timeline__title">みんなでパチンコ業界を救う</h4>
+          <p class="timeline__desc">俺たちだけじゃない。賛同する演者、ホール、お客さんが増えて、パチンコが「遊び」として愛される未来を実現する。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════════ FLOW ══════════════ -->
   <section class="flow">
     <div class="container">
@@ -1560,6 +1907,9 @@
     </div>
   </section>
 
+  <!-- ══════════════ BACK TO TOP ══════════════ -->
+  <button class="back-to-top gold-gradient" id="backToTop" onclick="window.scrollTo({top:0})">&#x2191;</button>
+
   <!-- ══════════════ FOOTER ══════════════ -->
   <footer>
     <p>&copy; 2026 GORGEOUS MORITOMO &mdash; Pachinko Entertainment Project</p>
@@ -1625,6 +1975,51 @@
       { threshold: 0.5 }
     );
     smileObserver.observe(counterSmile);
+
+    /* ── Scroll Progress Bar + Navbar + Back to Top ── */
+    const progressBar = document.getElementById('scrollProgress');
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+
+      /* progress bar */
+      progressBar.style.width = progress + '%';
+
+      /* navbar: show after scrolling past hero */
+      if (scrollTop > window.innerHeight * 0.8) {
+        navbar.classList.add('navbar--visible');
+      } else {
+        navbar.classList.remove('navbar--visible');
+      }
+
+      /* back to top button */
+      if (scrollTop > 1000) {
+        backToTop.classList.add('back-to-top--visible');
+      } else {
+        backToTop.classList.remove('back-to-top--visible');
+      }
+
+      lastScroll = scrollTop;
+    }, { passive: true });
+
+    /* ── FAQ Accordion ── */
+    document.querySelectorAll('.faq__question').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const wasActive = item.classList.contains('active');
+
+        /* close all */
+        document.querySelectorAll('.faq__item').forEach((i) => i.classList.remove('active'));
+
+        /* toggle clicked */
+        if (!wasActive) item.classList.add('active');
+      });
+    });
   </script>
 
 </body>
