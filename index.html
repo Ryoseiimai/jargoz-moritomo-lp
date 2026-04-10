@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ジャーゴスと森友 | 好きな台を、全力で。</title>
+  <style>
+    /* ═══════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold-1: #bf953f;
+      --gold-2: #fcf6ba;
+      --gold-3: #b38728;
+      --gold-4: #aa771c;
+      --gold-5: #fbf5b7;
+      --black: #0a0a0a;
+      --zinc-900: #18181b;
+      --zinc-800: #27272a;
+      --zinc-700: #3f3f46;
+      --red: #ef4444;
+      --green: #22c55e;
+      --blue: #60a5fa;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: #fff;
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════
+       UTILITY
+       ═══════════════════════════════════════ */
+    .text-gold {
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2), var(--gold-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-gradient {
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2), var(--gold-3), var(--gold-5), var(--gold-4));
+      background-size: 200% 200%;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ═══════════════════════════════════════
+       ANIMATIONS
+       ═══════════════════════════════════════ */
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { text-shadow: 0 0 20px rgba(191, 149, 63, 0.3); }
+      50% { text-shadow: 0 0 60px rgba(191, 149, 63, 0.6), 0 0 120px rgba(191, 149, 63, 0.2); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+
+    .stagger > .fade-in:nth-child(2) { transition-delay: 0.15s; }
+    .stagger > .fade-in:nth-child(3) { transition-delay: 0.3s; }
+    .stagger > .fade-in:nth-child(4) { transition-delay: 0.45s; }
+
+    /* ═══════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(191, 149, 63, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(179, 135, 40, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(170, 119, 28, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(252, 246, 186, 0.4), transparent),
+        radial-gradient(2px 2px at 40% 70%, rgba(252, 246, 186, 0.3), transparent),
+        radial-gradient(2px 2px at 60% 20%, rgba(252, 246, 186, 0.5), transparent),
+        radial-gradient(2px 2px at 80% 60%, rgba(252, 246, 186, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 15% 80%, rgba(252, 246, 186, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 70% 45%, rgba(252, 246, 186, 0.4), transparent);
+      animation: float 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero__kicker {
+      font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+      letter-spacing: 0.35em;
+      color: rgba(191, 149, 63, 0.7);
+      margin-bottom: 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__title {
+      font-size: clamp(3rem, 10vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 0.6rem;
+      position: relative;
+      z-index: 1;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    .hero__subtitle {
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__desc {
+      font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      color: #a1a1aa;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border-radius: 999px;
+      color: var(--black);
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s;
+    }
+    .hero__cta:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 40px rgba(191, 149, 63, 0.4);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(191, 149, 63, 0.5);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+    }
+    .scroll-hint span {
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(191, 149, 63, 0.5), transparent);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    /* ═══════════════════════════════════════
+       PROBLEM / WHY
+       ═══════════════════════════════════════ */
+    .problem {
+      padding: 7rem 0;
+      background: var(--zinc-900);
+    }
+
+    .problem__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .problem__sub {
+      text-align: center;
+      color: #71717a;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .problem__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .problem__card {
+      padding: 2rem;
+      border-radius: 1.25rem;
+      position: relative;
+    }
+
+    .problem__card--bad {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.15);
+    }
+
+    .problem__card--good {
+      background: rgba(34, 197, 94, 0.06);
+      border: 1px solid rgba(34, 197, 94, 0.15);
+    }
+
+    .problem__card-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    .problem__card-label--bad { color: var(--red); }
+    .problem__card-label--good { color: var(--green); }
+
+    .problem__card-text {
+      color: #d4d4d8;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .problem__card-text strong {
+      color: #fff;
+    }
+
+    /* ═══════════════════════════════════════
+       CONCEPT
+       ═══════════════════════════════════════ */
+    .concept {
+      padding: 7rem 0;
+    }
+
+    .concept__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    .concept__lead {
+      text-align: center;
+      color: #a1a1aa;
+      max-width: 720px;
+      margin: 0 auto 4rem;
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+
+    .concept__items {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .concept__item {
+      border-left: 4px solid var(--gold-3);
+      padding: 1.5rem 2rem;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: #d4d4d8;
+      line-height: 1.9;
+      background: linear-gradient(90deg, rgba(191, 149, 63, 0.04), transparent);
+      border-radius: 0 0.75rem 0.75rem 0;
+    }
+
+    .concept__item--hero {
+      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      font-weight: 700;
+      color: #fff;
+      border-left-width: 6px;
+      background: linear-gradient(90deg, rgba(191, 149, 63, 0.08), transparent);
+    }
+
+    /* ═══════════════════════════════════════
+       THREE PILLARS
+       ═══════════════════════════════════════ */
+    .pillars {
+      padding: 7rem 0;
+      background: var(--zinc-900);
+    }
+
+    .pillars__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .pillars__sub {
+      text-align: center;
+      color: #71717a;
+      margin-bottom: 4rem;
+      font-size: 1rem;
+    }
+
+    .pillars__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .pillar {
+      padding: 2.5rem 2rem;
+      border-radius: 1.5rem;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s;
+    }
+    .pillar:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(191, 149, 63, 0.1);
+    }
+
+    .pillar__number {
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0.15;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+    }
+
+    .pillar__icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .pillar__title { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .pillar__desc { color: #a1a1aa; font-size: 0.95rem; line-height: 1.8; }
+
+    /* ═══════════════════════════════════════
+       WIN-WIN STRUCTURE
+       ═══════════════════════════════════════ */
+    .winwin {
+      padding: 7rem 0;
+    }
+
+    .winwin__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 4rem;
+    }
+
+    .winwin__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .winwin__card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: 1.25rem;
+      background: var(--zinc-800);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .winwin__card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 1.25rem;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(191, 149, 63, 0.3), transparent, rgba(191, 149, 63, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .winwin__icon { font-size: 3rem; margin-bottom: 1rem; }
+    .winwin__role {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--gold-3);
+      margin-bottom: 0.5rem;
+    }
+    .winwin__title { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .winwin__desc { color: #a1a1aa; font-size: 0.9rem; line-height: 1.8; }
+
+    /* ═══════════════════════════════════════
+       STATS STRIP
+       ═══════════════════════════════════════ */
+    .stats {
+      background: var(--zinc-900);
+      padding: 5rem 0;
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: 1.25rem;
+      background: var(--zinc-800);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 1.25rem;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(191, 149, 63, 0.3), transparent, rgba(191, 149, 63, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .stat-card--highlight {
+      background: linear-gradient(135deg, rgba(191, 149, 63, 0.08), rgba(170, 119, 28, 0.05));
+    }
+
+    .stat-card__label {
+      font-size: 0.85rem;
+      color: #71717a;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .stat-card__value {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+    }
+    .stat-card__value--red { color: var(--red); }
+    .stat-card__value--blue { color: var(--blue); }
+
+    /* ═══════════════════════════════════════
+       BIG QUOTE
+       ═══════════════════════════════════════ */
+    .big-quote {
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .big-quote::before {
+      content: "\201C";
+      position: absolute;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12rem;
+      line-height: 1;
+      opacity: 0.06;
+      font-family: Georgia, serif;
+    }
+
+    .big-quote__text {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800;
+      max-width: 950px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.5;
+    }
+
+    .big-quote__author {
+      color: var(--gold-3);
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ═══════════════════════════════════════
+       CTA FINAL
+       ═══════════════════════════════════════ */
+    .cta-final {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: linear-gradient(to top, rgba(191, 149, 63, 0.05), transparent);
+    }
+
+    .cta-final__heading {
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-final__desc {
+      color: #a1a1aa;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    .cta-final__buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-final__btn {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s;
+    }
+    .cta-final__btn--primary {
+      color: var(--black);
+    }
+    .cta-final__btn--secondary {
+      color: var(--gold-3);
+      border: 2px solid rgba(191, 149, 63, 0.4);
+      background: transparent;
+    }
+    .cta-final__btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 50px rgba(191, 149, 63, 0.3);
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════ */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--zinc-800);
+      color: #52525b;
+      font-size: 0.85rem;
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .stats__grid,
+      .pillars__grid,
+      .winwin__grid {
+        grid-template-columns: 1fr;
+      }
+      .problem__grid {
+        grid-template-columns: 1fr;
+      }
+      .pillar__number { font-size: 3.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section class="hero">
+    <p class="hero__kicker">PACHINKO ENTERTAINMENT PROJECT</p>
+    <h1 class="hero__title text-gold">ジャーゴス<br>と森友</h1>
+    <h2 class="hero__subtitle text-gold">好きな台を、全力で。負け覚悟で、笑おう。</h2>
+    <p class="hero__desc">
+      設定なんか関係ない。好きな台に座って、全力で楽しむ。<br>
+      結果？　負けたっていい。散り方が最高なら、それは勝ちだ。
+    </p>
+    <a href="#concept" class="hero__cta gold-gradient">俺たちの遊び方を見る</a>
+    <div class="scroll-hint">
+      SCROLL
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ══════════════ PROBLEM ══════════════ -->
+  <section class="problem">
+    <div class="container">
+      <h3 class="problem__heading fade-in">
+        <span class="text-gold">演者が来ると、客が勝つ。<br>それ、おかしくない？</span>
+      </h3>
+      <p class="problem__sub fade-in">
+        演者が来店する日だけ高設定が入る。<br>
+        それはエンタメじゃない。ただの営業ツールだ。<br>
+        店が潤わなければ、俺たちの遊び場はなくなる。
+      </p>
+
+      <div class="problem__grid">
+        <div class="problem__card problem__card--bad fade-in">
+          <p class="problem__card-label problem__card-label--bad">&#x2716; 今の演者来店</p>
+          <p class="problem__card-text">
+            <strong>高設定を入れて客に勝たせる</strong><br>
+            → 店の利益が減る<br>
+            → 演者が来ない日は渋い<br>
+            → 「あの店は演者の日だけ」という評判<br>
+            → 業界全体の信頼が下がる
+          </p>
+        </div>
+        <div class="problem__card problem__card--good fade-in">
+          <p class="problem__card-label problem__card-label--good">&#x2714; 俺たちのスタイル</p>
+          <p class="problem__card-text">
+            <strong>好きな台を負け覚悟で全力で打つ</strong><br>
+            → 店は通常営業でOK<br>
+            → 「散り芸」がエンタメになる<br>
+            → ホールにダメージゼロ<br>
+            → むしろ店を儲けさせて業界に還元
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ CONCEPT ══════════════ -->
+  <section class="concept" id="concept">
+    <div class="container">
+      <h3 class="concept__heading fade-in">
+        <span class="text-gold">負けに行くんじゃない。<br>負け覚悟で、やりに行く。</span>
+      </h3>
+      <p class="concept__lead fade-in">
+        あえて負けるのはただの自虐。それじゃ面白くない。<br>
+        好きな台に何でもない日に行って、思う存分打って、<br>
+        負けてもいい仲間と一緒に笑う。それが俺たちの遊び方。
+      </p>
+
+      <div class="concept__items">
+        <div class="concept__item fade-in-left">
+          クソ台打ちニキが愛される理由を知ってるか？<br>
+          あえてクソ台を選んで、知識と愛をもって打つ。<br>
+          ホールにダメージゼロ。むしろ「ちょっと打ってみたい」と思わせる。<br>
+          <strong>愛のある散り方には、人を動かす力がある。</strong>
+        </div>
+        <div class="concept__item fade-in-left" style="transition-delay:0.15s">
+          全ツ8000が成立するのは、ルールが明確だから。<br>
+          「とりあえず一台を全ツッパ」——ルール上負ける。<br>
+          俺たちも同じ。<strong>好きな台を、何でもない日に、全力で。</strong><br>
+          そのルールの中で、最高の散り芸を魅せる。
+        </div>
+        <div class="concept__item concept__item--hero fade-in-left" style="transition-delay:0.3s">
+          ホールにある設定1は俺たちが請け負う。<br>
+          みんなはツモって勝ってくれ。<br>
+          俺たちが店を儲けさせて、みんなに還元する。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ THREE PILLARS ══════════════ -->
+  <section class="pillars" id="pillars">
+    <div class="container">
+      <h3 class="pillars__heading fade-in">
+        <span class="text-gold">散り芸の3つのルール</span>
+      </h3>
+      <p class="pillars__sub fade-in">コンセプトがあるから面白い。ルールがあるから成立する。</p>
+      <div class="pillars__grid stagger">
+
+        <div class="pillar fade-in">
+          <span class="pillar__number text-gold">01</span>
+          <div class="pillar__icon">&#x1F3B0;</div>
+          <h4 class="pillar__title">好きな台を打つ</h4>
+          <p class="pillar__desc">
+            設定狙いじゃない。打ちたい台に座る。
+            その台への愛と知識で、最高のエンタメを生む。
+            クソ台だって、愛があれば輝く。
+          </p>
+        </div>
+
+        <div class="pillar fade-in">
+          <span class="pillar__number text-gold">02</span>
+          <div class="pillar__icon">&#x1F4A5;</div>
+          <h4 class="pillar__title">散り方で魅せる</h4>
+          <p class="pillar__desc">
+            勝ちを見せるのは簡単。負けを面白くするのが腕。
+            フリーズだけ願いながら、全力で回す。
+            その過程こそがコンテンツ。
+          </p>
+        </div>
+
+        <div class="pillar fade-in">
+          <span class="pillar__number text-gold">03</span>
+          <div class="pillar__icon">&#x1F91D;</div>
+          <h4 class="pillar__title">一緒に楽しむ</h4>
+          <p class="pillar__desc">
+            「負けてもいい人、一緒に打とう！」
+            隣で好きな台を打って、笑って、散る。
+            来てくれた仲間との時間が一番の価値。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ RADIUS THEORY ══════════════ -->
+  <section class="concept" id="radius" style="background: var(--zinc-900);">
+    <div class="container">
+      <h3 class="concept__heading fade-in">
+        <span class="text-gold">「半径理論」<br>——俺に近いほど設定1。離れるほど高設定。</span>
+      </h3>
+      <p class="concept__lead fade-in">
+        今の業界は、パチプロを大切にしすぎている。<br>
+        本当に大切にするべきは、<strong style="color:#fff">普通に遊びに来てくれるお客さん</strong>だ。
+      </p>
+
+      <div class="concept__items">
+        <div class="concept__item fade-in-left">
+          俺たちの周りは設定1。全力で負ける。<br>
+          でもその分、離れた席のお客さんには高設定が入る。<br>
+          <strong>全体で見たら、お客さんが勝ってる。</strong><br>
+          これがホールとお客さん、両方を大切にする仕組み。
+        </div>
+        <div class="concept__item fade-in-left" style="transition-delay:0.15s">
+          じゃあ俺たちの周りは損なのか？<br>
+          逆だ。パチンコ屋からの最高の恩返しがある。<br>
+          <strong>ゴージャスな空間、VIP待遇、最高のおもてなし。</strong><br>
+          設定じゃなく「体験」で返してもらう。それが俺たちの特権。
+        </div>
+        <div class="concept__item concept__item--hero fade-in-left" style="transition-delay:0.3s">
+          パチプロが勝つ時代は終わりだ。<br>
+          お客さんが楽しんで、ホールが潤って、<br>
+          俺たちは最高の散り芸とゴージャスな体験を手に入れる。<br>
+          <strong>これが、全員が笑える新しいパチンコだ。</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ WIN-WIN STRUCTURE ══════════════ -->
+  <section class="winwin">
+    <div class="container">
+      <h3 class="winwin__heading fade-in">
+        <span class="text-gold">全員が得する構造</span>
+      </h3>
+      <div class="winwin__grid stagger">
+
+        <div class="winwin__card fade-in">
+          <div class="winwin__icon">&#x1F3E0;</div>
+          <p class="winwin__role">HALL</p>
+          <h4 class="winwin__title">ホールが儲かる</h4>
+          <p class="winwin__desc">
+            設定を上げる必要がない。<br>
+            通常営業のままで演者来店が成立。<br>
+            利益を圧迫しないからリピートで呼べる。
+          </p>
+        </div>
+
+        <div class="winwin__card fade-in">
+          <div class="winwin__icon">&#x1F3AC;</div>
+          <p class="winwin__role">VIEWER</p>
+          <h4 class="winwin__title">視聴者が楽しい</h4>
+          <p class="winwin__desc">
+            勝ち確動画はもう飽きた。<br>
+            散り芸のドラマと予測不能な展開。<br>
+            「今日はどう負けるんだ？」が最高のフック。
+          </p>
+        </div>
+
+        <div class="winwin__card fade-in">
+          <div class="winwin__icon">&#x1F525;</div>
+          <p class="winwin__role">PLAYER</p>
+          <h4 class="winwin__title">俺たちが楽しい</h4>
+          <p class="winwin__desc">
+            好きな台を好きなだけ打てる。<br>
+            設定なんか気にしない。純粋に遊ぶ。<br>
+            その姿がそのままコンテンツになる。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ STATS ══════════════ -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats__grid stagger">
+        <div class="stat-card fade-in">
+          <p class="stat-card__label">累計業界貢献額</p>
+          <p class="stat-card__value stat-card__value--red" id="counter-loss">&yen;0</p>
+        </div>
+        <div class="stat-card stat-card--highlight fade-in">
+          <p class="stat-card__label">散り芸クオリティ</p>
+          <p class="stat-card__value text-gold">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+        </div>
+        <div class="stat-card fade-in">
+          <p class="stat-card__label">笑顔で帰れた回数</p>
+          <p class="stat-card__value stat-card__value--blue" id="counter-smile">0回</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ BIG QUOTE ══════════════ -->
+  <section class="big-quote">
+    <div class="container">
+      <p class="big-quote__text fade-in">
+        <span class="text-gold">ホールにある設定1は<br>俺たちが請け負う。<br>みんなはツモって勝ってくれ。</span>
+      </p>
+      <p class="big-quote__author fade-in">&#8212; ジャーゴスと森友</p>
+    </div>
+  </section>
+
+  <!-- ══════════════ CTA FINAL ══════════════ -->
+  <section class="cta-final">
+    <div class="container">
+      <h3 class="cta-final__heading fade-in">
+        <span class="text-gold">一緒に打たない？</span>
+      </h3>
+      <p class="cta-final__desc fade-in">
+        好きな台を何でもない日に行って、思う存分打って、<br>
+        負けてもいいから笑って帰ろう。<br>
+        そんな仲間を募集中。ホール店長さんからの連絡も大歓迎。
+      </p>
+      <div class="cta-final__buttons fade-in">
+        <a href="#" class="cta-final__btn cta-final__btn--primary gold-gradient">一緒に散りに行く</a>
+        <a href="#" class="cta-final__btn cta-final__btn--secondary">ホール関係者の方はこちら</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <p>&copy; 2026 JARGOZ &amp; MORITOMO &mdash; Pachinko Entertainment Project</p>
+  </footer>
+
+  <!-- ══════════════ SCRIPTS ══════════════ -->
+  <script>
+    /* ── Scroll Reveal ── */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.fade-in, .fade-in-left').forEach((el) => observer.observe(el));
+
+    /* ── Counter Animation ── */
+    function animateCounter(el, target, duration, prefix, suffix) {
+      const start = performance.now();
+      const format = new Intl.NumberFormat('ja-JP');
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(eased * target);
+        el.textContent = prefix + format.format(current) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    /* loss counter */
+    const counterLoss = document.getElementById('counter-loss');
+    const lossObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(counterLoss, 777000, 2000, '\u00A5', '');
+            lossObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    lossObserver.observe(counterLoss);
+
+    /* smile counter */
+    const counterSmile = document.getElementById('counter-smile');
+    const smileObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(counterSmile, 100, 1500, '', '\u56DE');
+            smileObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    smileObserver.observe(counterSmile);
+  </script>
+
+</body>
+</html>
