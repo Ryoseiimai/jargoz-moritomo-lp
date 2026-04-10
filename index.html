@@ -41,7 +41,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 60px;
+      scroll-padding-top: 56px;
     }
 
     body {
@@ -839,6 +839,93 @@
 
     @media (max-width: 768px) {
       .navbar__links { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       SITE HEADER (常時表示・pekaru.tv style)
+       ═══════════════════════════════════════ */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+      background: rgba(10,10,10,0.95);
+      border-bottom: 1px solid rgba(191,149,63,0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .site-header__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-header__logo {
+      font-size: 1.1rem;
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .site-header__nav {
+      display: flex;
+      gap: 0;
+      list-style: none;
+    }
+    .site-header__nav li a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+      display: block;
+    }
+    .site-header__nav li a:hover {
+      color: var(--gold-2);
+      background: rgba(191,149,63,0.1);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold-2);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .site-header__nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10,10,10,0.98);
+        border-bottom: 1px solid rgba(191,149,63,0.3);
+        flex-direction: column;
+        padding: 0.5rem 0;
+      }
+      .site-header__nav.open { display: flex; }
+      .site-header__nav li a {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0;
+      }
     }
 
     /* ═══════════════════════════════════════
@@ -1682,24 +1769,28 @@
     </div>
   </div>
 
+  <!-- ══════════════ SITE HEADER (常時表示) ══════════════ -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+      <a href="#" class="site-header__logo text-gold">&#x1F3B0; ジャーゴスな森友</a>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="site-header__nav" id="headerNav">
+        <li><a href="#concept">コンセプト</a></li>
+        <li><a href="#pillars">3つのルール</a></li>
+        <li><a href="#radius">仕組み</a></li>
+        <li><a href="schedule.html">&#x1F4C5; 来店予定</a></li>
+        <li><a href="#faq-section">FAQ</a></li>
+      </ul>
+    </div>
+  </header>
+
   <!-- ══════════════ CURSOR GLOW ══════════════ -->
   <div class="cursor-glow" id="cursorGlow"></div>
 
   <!-- ══════════════ SCROLL PROGRESS ══════════════ -->
   <div class="scroll-progress" id="scrollProgress"></div>
-
-  <!-- ══════════════ NAVBAR ══════════════ -->
-  <nav class="navbar" id="navbar">
-    <a href="#" class="navbar__logo text-gold">&#x1F3B0; ジャーゴスな森友</a>
-    <ul class="navbar__links">
-      <li><a href="#concept" class="navbar__link">コンセプト</a></li>
-      <li><a href="#pillars" class="navbar__link">3つのルール</a></li>
-      <li><a href="#radius" class="navbar__link">仕組み</a></li>
-      <li><a href="schedule.html" class="navbar__link">来店予定</a></li>
-      <li><a href="#gallery-section" class="navbar__link">ギャラリー</a></li>
-      <li><a href="#faq-section" class="navbar__link">FAQ</a></li>
-    </ul>
-  </nav>
 
   <!-- ══════════════ HERO ══════════════ -->
   <section class="hero">
@@ -2368,6 +2459,16 @@
 
   <!-- ══════════════ SCRIPTS ══════════════ -->
   <script>
+    /* ── Hamburger Menu ── */
+    const hamburger = document.getElementById('hamburger');
+    const headerNav = document.getElementById('headerNav');
+    if (hamburger && headerNav) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        headerNav.classList.toggle('open');
+      });
+    }
+
     /* ── Scroll Reveal ── */
     const observer = new IntersectionObserver(
       (entries) => {
@@ -2427,9 +2528,8 @@
     );
     smileObserver.observe(counterSmile);
 
-    /* ── Scroll Progress Bar + Navbar + Back to Top ── */
+    /* ── Scroll Progress Bar + Back to Top ── */
     const progressBar = document.getElementById('scrollProgress');
-    const navbar = document.getElementById('navbar');
     const backToTop = document.getElementById('backToTop');
     let lastScroll = 0;
 
@@ -2440,13 +2540,6 @@
 
       /* progress bar */
       progressBar.style.width = progress + '%';
-
-      /* navbar: show after scrolling past hero */
-      if (scrollTop > window.innerHeight * 0.8) {
-        navbar.classList.add('navbar--visible');
-      } else {
-        navbar.classList.remove('navbar--visible');
-      }
 
       /* back to top button */
       if (scrollTop > 1000) {
@@ -2491,8 +2584,8 @@
     /* ── Sticky Mobile CTA ── */
     const stickyCta = document.getElementById('stickyCta');
 
-    /* ── Active Nav Link ── */
-    const navLinks = document.querySelectorAll('.navbar__link');
+    /* ── Active Nav Link (site-header) ── */
+    const headerNavLinks = document.querySelectorAll('.site-header__nav li a[href^="#"]');
     const sections = document.querySelectorAll('section[id]');
 
     function updateActiveNav() {
@@ -2501,12 +2594,14 @@
         const top = sec.offsetTop;
         const height = sec.offsetHeight;
         const id = sec.getAttribute('id');
-        const link = document.querySelector('.navbar__link[href="#' + id + '"]');
+        const link = document.querySelector('.site-header__nav li a[href="#' + id + '"]');
         if (link) {
           if (scrollY >= top && scrollY < top + height) {
-            link.classList.add('navbar__link--active');
+            link.style.color = 'var(--gold-2)';
+            link.style.background = 'rgba(191,149,63,0.15)';
           } else {
-            link.classList.remove('navbar__link--active');
+            link.style.color = '';
+            link.style.background = '';
           }
         }
       });
