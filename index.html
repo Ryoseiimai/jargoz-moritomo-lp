@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ジャーゴスと森友 | 好きな台を、全力で。</title>
+
+  <!-- OGP -->
+  <meta property="og:title" content="ジャーゴスと森友 | 好きな台を、全力で。">
+  <meta property="og:description" content="設定1は俺たちが請け負う。みんなはツモって勝ってくれ。パチンコ業界を救う「負け覚悟のエンタメ」始動。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ryoseiimai.github.io/jargoz-moritomo-lp/">
+  <meta property="og:image" content="https://ryoseiimai.github.io/jargoz-moritomo-lp/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ジャーゴスと森友 | 好きな台を、全力で。">
+  <meta name="twitter:description" content="設定1は俺たちが請け負う。みんなはツモって勝ってくれ。みんなでパチンコ業界を救おう。">
+  <meta name="description" content="パチプロだった俺たちが気づいた。パチンコの本当の楽しさを忘れていた。好きな台を負け覚悟で全力で打つ。散り芸エンタメ、始動。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎰</text></svg>">
+
   <style>
     /* ═══════════════════════════════════════
        RESET & BASE
@@ -582,6 +595,221 @@
     }
 
     /* ═══════════════════════════════════════
+       PROFILES
+       ═══════════════════════════════════════ */
+    .profiles {
+      padding: 7rem 0;
+      background: var(--zinc-900);
+    }
+
+    .profiles__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 4rem;
+    }
+
+    .profiles__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .profile {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 1.5rem;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 1.5rem;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(191, 149, 63, 0.4), transparent, rgba(191, 149, 63, 0.15));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .profile__avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, rgba(191, 149, 63, 0.15), rgba(191, 149, 63, 0.05));
+      border: 2px solid rgba(191, 149, 63, 0.3);
+    }
+
+    .profile__name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile__role {
+      font-size: 0.85rem;
+      color: var(--gold-3);
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .profile__desc {
+      color: #a1a1aa;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .profile__motto {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--zinc-700);
+      font-style: italic;
+      color: #d4d4d8;
+      font-size: 0.95rem;
+    }
+
+    /* ═══════════════════════════════════════
+       HOW TO JOIN (FLOW)
+       ═══════════════════════════════════════ */
+    .flow {
+      padding: 7rem 0;
+    }
+
+    .flow__heading {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .flow__sub {
+      text-align: center;
+      color: #71717a;
+      margin-bottom: 4rem;
+      font-size: 1rem;
+    }
+
+    .flow__steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .flow__step {
+      text-align: center;
+      padding: 2rem 1.2rem;
+      border-radius: 1.25rem;
+      background: var(--zinc-800);
+      position: relative;
+    }
+
+    .flow__step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--black);
+    }
+
+    .flow__step-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .flow__step-desc {
+      font-size: 0.85rem;
+      color: #a1a1aa;
+      line-height: 1.7;
+    }
+
+    /* connector arrows */
+    .flow__step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-3);
+      font-size: 1.5rem;
+      font-weight: 700;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════
+       SHARE BAR
+       ═══════════════════════════════════════ */
+    .share {
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .share__label {
+      font-size: 0.85rem;
+      color: #71717a;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .share__buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .share__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.3s var(--ease-out-expo), opacity 0.3s;
+    }
+    .share__btn:hover { transform: scale(1.06); }
+
+    .share__btn--x {
+      background: #fff;
+      color: #000;
+    }
+
+    .share__btn--line {
+      background: #06c755;
+      color: #fff;
+    }
+
+    .share__btn--copy {
+      background: var(--zinc-700);
+      color: #fff;
+    }
+
+    /* ═══════════════════════════════════════
        FOOTER
        ═══════════════════════════════════════ */
     footer {
@@ -603,6 +831,15 @@
       }
       .problem__grid {
         grid-template-columns: 1fr;
+      }
+      .profiles__grid {
+        grid-template-columns: 1fr;
+      }
+      .flow__steps {
+        grid-template-columns: 1fr 1fr;
+      }
+      .flow__step:not(:last-child)::after {
+        display: none;
       }
       .pillar__number { font-size: 3.5rem; }
     }
@@ -867,6 +1104,74 @@
     </div>
   </section>
 
+  <!-- ══════════════ PROFILES ══════════════ -->
+  <section class="profiles">
+    <div class="container">
+      <h3 class="profiles__heading fade-in">
+        <span class="text-gold">俺たちについて</span>
+      </h3>
+      <div class="profiles__grid">
+
+        <div class="profile fade-in">
+          <div class="profile__avatar">&#x1F432;</div>
+          <h4 class="profile__name">ジャーゴス</h4>
+          <p class="profile__role">GORGEOUS LOSER</p>
+          <p class="profile__desc">
+            元パチプロ。設定狙いで食っていた時代に<br>
+            パチンコの楽しさを見失った。<br>
+            今は好きな台を全力で打つことが生きがい。
+          </p>
+          <p class="profile__motto">「散り際が一番カッコいい」</p>
+        </div>
+
+        <div class="profile fade-in">
+          <div class="profile__avatar">&#x1F43B;</div>
+          <h4 class="profile__name">森友</h4>
+          <p class="profile__role">FOREST FRIEND</p>
+          <p class="profile__desc">
+            パチンコを「遊び」として愛する男。<br>
+            勝ち負けより、隣で一緒に打つ仲間が大事。<br>
+            ホールの未来を本気で考えている。
+          </p>
+          <p class="profile__motto">「負けた日の帰り道が一番楽しい」</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FLOW ══════════════ -->
+  <section class="flow">
+    <div class="container">
+      <h3 class="flow__heading fade-in">
+        <span class="text-gold">どうやって参加する？</span>
+      </h3>
+      <p class="flow__sub fade-in">一緒に散りに行くまでの流れ</p>
+      <div class="flow__steps stagger">
+        <div class="flow__step fade-in">
+          <div class="flow__step-num gold-gradient">1</div>
+          <h4 class="flow__step-title">SNSをフォロー</h4>
+          <p class="flow__step-desc">開催情報はSNSで告知。まずはフォローから。</p>
+        </div>
+        <div class="flow__step fade-in">
+          <div class="flow__step-num gold-gradient">2</div>
+          <h4 class="flow__step-title">来店イベントに参加</h4>
+          <p class="flow__step-desc">好きな台を打ちに来るだけ。負けてもいい人だけ。</p>
+        </div>
+        <div class="flow__step fade-in">
+          <div class="flow__step-num gold-gradient">3</div>
+          <h4 class="flow__step-title">一緒に打つ</h4>
+          <p class="flow__step-desc">隣の席で好きな台を全力で。散り芸を見せ合おう。</p>
+        </div>
+        <div class="flow__step fade-in">
+          <div class="flow__step-num gold-gradient">4</div>
+          <h4 class="flow__step-title">笑って帰る</h4>
+          <p class="flow__step-desc">勝っても負けても最高の1日。それが全勝。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════════ CTA FINAL ══════════════ -->
   <section class="cta-final">
     <div class="container">
@@ -881,6 +1186,24 @@
       <div class="cta-final__buttons fade-in">
         <a href="#" class="cta-final__btn cta-final__btn--primary gold-gradient">一緒に散りに行く</a>
         <a href="#" class="cta-final__btn cta-final__btn--secondary">ホール関係者の方はこちら</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SHARE ══════════════ -->
+  <section class="share">
+    <div class="container">
+      <p class="share__label">SHARE THIS PROJECT</p>
+      <div class="share__buttons">
+        <a href="https://twitter.com/intent/tweet?text=%E3%82%B8%E3%83%A3%E3%83%BC%E3%82%B4%E3%82%B9%E3%81%A8%E6%A3%AE%E5%8F%8B%E3%80%8C%E5%A5%BD%E3%81%8D%E3%81%AA%E5%8F%B0%E3%82%92%E3%80%81%E5%85%A8%E5%8A%9B%E3%81%A7%E3%80%82%E3%80%8D%0A%E8%A8%AD%E5%AE%9A1%E3%81%AF%E4%BF%BA%E3%81%9F%E3%81%A1%E3%81%8C%E8%AB%8B%E3%81%91%E8%B2%A0%E3%81%86%E3%80%82%E3%81%BF%E3%82%93%E3%81%AA%E3%81%A7%E3%83%91%E3%83%81%E3%83%B3%E3%82%B3%E6%A5%AD%E7%95%8C%E3%82%92%E6%95%91%E3%81%8A%E3%81%86%E3%80%82&url=https://ryoseiimai.github.io/jargoz-moritomo-lp/" target="_blank" rel="noopener" class="share__btn share__btn--x">
+          &#x1D54F; Post
+        </a>
+        <a href="https://social-plugins.line.me/lineit/share?url=https://ryoseiimai.github.io/jargoz-moritomo-lp/" target="_blank" rel="noopener" class="share__btn share__btn--line">
+          LINE
+        </a>
+        <button class="share__btn share__btn--copy" onclick="navigator.clipboard.writeText('https://ryoseiimai.github.io/jargoz-moritomo-lp/').then(()=>this.textContent='Copied!')">
+          URL Copy
+        </button>
       </div>
     </div>
   </section>
